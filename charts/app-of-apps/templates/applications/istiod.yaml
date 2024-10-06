@@ -1,4 +1,4 @@
-{{ if and .Values.applications.istio.enabled (eq .Values.network.mode "istio") }}
+{{ if and .Values.network.enabled .Values.applications.istio.enabled }}
 apiVersion: argoproj.io/v1alpha1
 kind: Application
 metadata:
@@ -16,7 +16,7 @@ spec:
     namespace: {{ .Values.applications.istio.istiod.namespace }}
   project: {{ .Values.project.name }}
   source:
-    path: k12s/charts/istiod-{{ .Values.applications.istio.revision }}/istiod
+    path: charts/istiod-{{ .Values.applications.istio.revision }}/istiod
     repoURL: {{ .Values.project.repository }}
     targetRevision: {{ .Values.project.branch }}
     helm:

@@ -1,11 +1,11 @@
-{{ if .Values.applications.mysql.enabled }}
+{{ if .Values.applications.rabbitmq.enabled }}
 apiVersion: argoproj.io/v1alpha1
 kind: Application
 metadata:
-  name: mysql-operator
+  name: rabbitmq-cluster-operator
   namespace: {{ .Values.applications.argocd.namespace }}
   annotations:
-    argocd.argoproj.io/sync-wave: {{ .Values.applications.mysql.wave | quote }}
+    argocd.argoproj.io/sync-wave: {{ .Values.applications.rabbitmq.wave | quote }}
   labels:
     {{- include "app-of-apps.labels" . | nindent 4 }}
   finalizers:
@@ -13,10 +13,10 @@ metadata:
 spec:
   destination:
     server: https://kubernetes.default.svc
-    namespace: {{ .Values.applications.mysql.namespace }}
+    namespace: {{ .Values.applications.rabbitmq.namespace }}
   project: {{ .Values.project.name }}
   source:
-    path: k12s/charts/mysql-operator-{{ .Values.applications.mysql.revision }}/mysql-operator
+    path: charts/rabbitmq-cluster-operator-{{ .Values.applications.rabbitmq.revision }}/rabbitmq-cluster-operator
     repoURL: {{ .Values.project.repository }}
     targetRevision: {{ .Values.project.branch }}
     helm:
