@@ -1,11 +1,11 @@
-{{ if .Values.applications.mongodb.enabled }}
+{{ if .Values.applications.lgtm.enabled }}
 apiVersion: argoproj.io/v1alpha1
 kind: Application
 metadata:
-  name: mongodb-kubernetes-operator
+  name: lgtm-distributed
   namespace: {{ .Values.applications.argocd.namespace }}
   annotations:
-    argocd.argoproj.io/sync-wave: {{ .Values.applications.mongodb.wave | quote }}
+    argocd.argoproj.io/sync-wave: {{ .Values.applications.lgtm.wave | quote }}
   labels:
     {{- include "app-of-apps.labels" . | nindent 4 }}
   finalizers:
@@ -13,10 +13,10 @@ metadata:
 spec:
   destination:
     server: https://kubernetes.default.svc
-    namespace: {{ .Values.applications.mongodb.namespace }}
+    namespace: {{ .Values.applications.lgtm.namespace }}
   project: {{ .Values.project.name }}
   source:
-    path: k12s/charts/community-operator-{{ .Values.applications.mongodb.revision }}/community-operator
+    path: charts/lgtm-distributed-{{ .Values.applications.lgtm.revision }}/lgtm-distributed
     repoURL: {{ .Values.project.repository }}
     targetRevision: {{ .Values.project.branch }}
     helm:

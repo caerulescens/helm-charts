@@ -1,5 +1,4 @@
-{{/*todo: template spec.mtls*/}}
-{{ if and .Values.network.enabled (and .Values.applications.istio.enabled (eq .Values.network.mode "istio")) }}
+{{ if and .Values.network.enabled .Values.applications.istio.enabled }}
 apiVersion: security.istio.io/v1beta1
 kind: PeerAuthentication
 metadata:

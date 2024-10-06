@@ -1,4 +1,4 @@
-{{ if and .Values.applications.knative.enabled (and .Values.applications.istio.enabled (eq .Values.network.mode "istio")) }}
+{{ if and .Values.applications.knative.enabled .Values.applications.istio.enabled }}
 apiVersion: argoproj.io/v1alpha1
 kind: Application
 metadata:
@@ -16,7 +16,7 @@ spec:
     namespace: {{ .Values.applications.knative.operator.namespace }}
   project: {{ .Values.project.name }}
   source:
-    path: k12s/knative-operator/{{ .Values.project.platform }}-{{ .Values.project.environment }}-{{ .Values.project.profile }}
+    path: knative-operator/{{ .Values.project.platform }}-{{ .Values.project.environment }}-{{ .Values.project.profile }}
     kustomize:
       namespace: {{ .Values.applications.knative.operator.namespace }}
   syncPolicy:

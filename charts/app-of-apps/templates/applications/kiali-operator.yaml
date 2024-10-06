@@ -1,4 +1,4 @@
-{{ if .Values.applications.kiali.enabled }}
+{{ if and .Values.applications.istio.enabled .Values.applications.kiali.enabled }}
 apiVersion: argoproj.io/v1alpha1
 kind: Application
 metadata:
@@ -16,7 +16,7 @@ spec:
     namespace: {{ .Values.applications.kiali.namespace }}
   project: {{ .Values.project.name }}
   source:
-    path: k12s/charts/kiali-operator-{{ .Values.applications.kiali.revision }}/kiali-operator
+    path: charts/kiali-operator-{{ .Values.applications.kiali.revision }}/kiali-operator
     repoURL: {{ .Values.project.repository }}
     targetRevision: {{ .Values.project.branch }}
     helm:
