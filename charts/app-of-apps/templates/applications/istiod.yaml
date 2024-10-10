@@ -29,12 +29,6 @@ spec:
             logAsJson: {{ ternary true false (eq .Values.logs.format "json") }}
             base:
               validationCABundle: true
-
-{{/*          proxy:*/}}
-{{/*            tracer: "zipkin"*/}}
-{{/*          tracer:*/}}
-{{/*            zipkin:*/}}
-{{/*              address: "tempo-distributed-distributor.tempo.svc.cluster.local:9411"*/}}
   syncPolicy:
     automated:
       prune: true
