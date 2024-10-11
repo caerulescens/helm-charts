@@ -20,12 +20,14 @@ spec:
     repoURL: {{ .Values.project.repository }}
     targetRevision: {{ .Values.project.branch }}
     helm:
-      valuesObject:
-        global:
-          logAsJson: {{ ternary true false (eq .Values.logs.format "json") }}
-        labels:
-          app.kubernetes.io/name: istio-ingress
-          app.kubernetes.io/version: v{{ .Values.applications.istio.revision }}
+      valueFiles:
+        - values.yaml
+{{/*      valuesObject:*/}}
+{{/*        global:*/}}
+{{/*          logAsJson: {{ ternary true false (eq .Values.logs.format "json") }}*/}}
+{{/*        labels:*/}}
+{{/*          app.kubernetes.io/name: istio-ingress*/}}
+{{/*          app.kubernetes.io/version: v{{ .Values.applications.istio.revision }}*/}}
   syncPolicy:
     automated:
       prune: true

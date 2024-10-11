@@ -20,14 +20,16 @@ spec:
     repoURL: {{ .Values.project.repository }}
     targetRevision: {{ .Values.project.branch }}
     helm:
-      valuesObject:
-        defaults:
-          global:
-            configValidation: false  # todo: enable
-            istioNamespace: {{ .Values.applications.istio.istiod.namespace }}
-            certSigners:
-              - clusterissuers.cert-manager.io/istio-ca
-            logAsJson: {{ ternary true false (eq .Values.logs.format "json") }}
+      valueFiles:
+        - values.yaml
+{{/*      valuesObject:*/}}
+{{/*        defaults:*/}}
+{{/*          global:*/}}
+{{/*            configValidation: false  */}}
+{{/*            istioNamespace: {{ .Values.applications.istio.istiod.namespace }}*/}}
+{{/*            certSigners:*/}}
+{{/*              - clusterissuers.cert-manager.io/istio-ca*/}}
+{{/*            logAsJson: {{ ternary true false (eq .Values.logs.format "json") }}*/}}
   syncPolicy:
     automated:
       prune: true
