@@ -26,6 +26,9 @@ spec:
           logging:
             format: {{ .Values.logs.format }}
             level: {{ .Values.logs.level }}
+        redisSecretInit:
+          podAnnotations:
+            sidecar.istio.io/inject: "false"
         server:
           extraArgs:
             - --insecure
