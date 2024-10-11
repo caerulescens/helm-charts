@@ -20,12 +20,10 @@ spec:
     repoURL: {{ .Values.project.repository }}
     targetRevision: {{ .Values.project.branch }}
     helm:
-      valueFiles:
-        - values.yaml
-{{/*      valuesObject:*/}}
-{{/*        defaults:*/}}
-{{/*          global:*/}}
-{{/*            configValidation: false  */}}
+      valuesObject:
+        defaults:
+          global:
+            configValidation: false
 {{/*            istioNamespace: {{ .Values.applications.istio.istiod.namespace }}*/}}
 {{/*            certSigners:*/}}
 {{/*              - clusterissuers.cert-manager.io/istio-ca*/}}
