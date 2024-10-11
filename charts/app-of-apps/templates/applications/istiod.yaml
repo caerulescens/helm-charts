@@ -27,8 +27,6 @@ spec:
             certSigners:
               - clusterissuers.cert-manager.io/istio-ca
             logAsJson: {{ ternary true false (eq .Values.logs.format "json") }}
-        base:
-          validationCABundle: true
   syncPolicy:
     automated:
       prune: true
