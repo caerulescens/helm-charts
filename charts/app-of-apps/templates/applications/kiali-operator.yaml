@@ -116,12 +116,12 @@ spec:
                       namespace: {{ .Values.applications.istio.gateway.namespace }}
                   enabled: true
               grafana:
-                enabled: true
+                enabled: false
                 in_cluster_url: "http://kube-prometheus-stack-grafana.kube-prometheus:80/"
                 url: "http://kube-prometheus-stack-grafana.kube-prometheus:3000/"
               prometheus:
                 url: "http://kube-prometheus-stack-prometheus.kube-prometheus:9090/"
-                is_core: true
+                is_core: false
               tracing:
                 enabled: false
                 in_cluster_url: "http://tempo-distributed-gateway.tempo.svc.cluster.local:80/jaeger-query"
