@@ -23,6 +23,7 @@ spec:
       valuesObject:
         defaults:
           global:
+            configValidation: false  # todo: enable
             istioNamespace: {{ .Values.applications.istio.istiod.namespace }}
             certSigners:
               - clusterissuers.cert-manager.io/istio-ca
